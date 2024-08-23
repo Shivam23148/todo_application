@@ -4,6 +4,7 @@ import 'package:todo_application/blocs/TaskBloc/task_bloc.dart';
 import 'package:todo_application/blocs/TaskBloc/task_event.dart';
 import 'package:todo_application/models/task_model.dart';
 import 'package:todo_application/services/notification_service.dart';
+import 'package:todo_application/utils/date_formating.dart';
 
 class AddTaskScreen extends StatefulWidget {
   AddTaskScreen({super.key, required this.taskBloc});
@@ -92,9 +93,6 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
 
   @override
   Widget build(BuildContext context) {
-    String formattedDate =
-        DateFormat('dd MMMM yyyy').format(_selectedDueDateTime);
-    String formattedTime = DateFormat('hh:mm a').format(_selectedDueDateTime);
     return WillPopScope(
       onWillPop: _onWillPop,
       child: Scaffold(
@@ -137,7 +135,7 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                 children: [
                   Expanded(
                     child: Text(
-                      "$formattedDate at $formattedTime",
+                      "${DateTimeUtils.formatDate(_selectedDueDateTime)} at ${DateTimeUtils.formatTime(_selectedDueDateTime)}",
                       style: TextStyle(fontSize: 15),
                     ),
                   ),
